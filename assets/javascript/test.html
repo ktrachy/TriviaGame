@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Select your favorite browser:</p>
+
+  <input type="radio" name="cgimovie" onclick="myFunction(this.value)" value="A Bugs Life">A Bugs Life<br>
+  <input type="radio" name="cgimovie" onclick="myFunction(this.value)" value="Mosters Inc">Monsters Inc<br>
+  <input type="radio" name="cgimovie" onclick="myFunction(this.value)" value="Toy Story">Toy Story<br>
+  <input type="radio" name="cgimovie" onclick="myFunction(this.value)" value="The Lion King">The Lion King<br>
+
+
+  Your favorite browser is: <input type="text" id="result">
+
+</form>
+
+<script>
+function myFunction(cgimovie) {
+    document.getElementById("result").value = cgimovie;
+}
+</script>
+
+</body>
+</html>
+
+
+<!-- "<form action=\"\"><input type=\"radio\" name=\"cgimovie\" value=\"A Bugs Life\">A Bugs Life <input type=\"radio\" name=\"cgimovie\" value=\"Monsters Inc\"> Monsters Inc <input type=\"radio\" name=\"cgimovie\" value=\"Toy Story\"> Toy Story <input type=\"radio\" name=\"cgimovie\" value=\"The Lion King\"> The Lion King</form>"; -->

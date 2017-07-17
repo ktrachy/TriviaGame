@@ -1,15 +1,37 @@
 $(document).ready(function() {
 
+    // Hides the things we don't want to see on page load
     $("#done").hide();
     $("#correctanswers").hide();
     $("#incorrectanswers").hide();
     $("#unansweredquestions").hide();
 
+    // Sets all the variables
     var number = 60;
     var intervalId;
+    var cgimovie = 0;
+    var spicegirls = 0;
+    var nba = 0;
+    var group = 0;
+    var prince = 0;
+    var correctAnswer1 = 0;
+    var incorrectAnswer1 = 0;
+    var unansweredQuestion1 = 0;
+    var correctAnswer2 = 0;
+    var incorrectAnswer2 = 0;
+    var unansweredQuestion2 = 0;
+    var correctAnswer3 = 0;
+    var incorrectAnswer3 = 0;
+    var unansweredQuestion3 = 0;
+    var correctAnswer4 = 0;
+    var incorrectAnswer4 = 0;
+    var unansweredQuestion4 = 0;
+    var correctAnswer5 = 0;
+    var incorrectAnswer5 = 0;
+    var unansweredQuestion5 = 0;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
-    var unansweredQuestions = 1;
+    var unansweredQuestions = 0;
     var answerOptions1 = "<form action=\"\"><input type=\"radio\" name=\"cgimovie\" value=\"A Bugs Life\">A Bugs Life <input type=\"radio\" name=\"cgimovie\" value=\"Monsters Inc\"> Monsters Inc <input type=\"radio\" name=\"cgimovie\" value=\"Toy Story\"> Toy Story <input type=\"radio\" name=\"cgimovie\" value=\"The Lion King\"> The Lion King</form>";
     var answerOptions2 = "<form action=\"\"><input type=\"radio\" name=\"spicegirls\" value=\"Sporty Spice\">Sporty Spice <input type=\"radio\" name=\"spicegirls\" value=\"Fred Spice\"> Fred Spice <input type=\"radio\" name=\"spicegirls\" value=\"Scary Spice\"> Scary Spice <input type=\"radio\" name=\"spicegirls\" value=\"Posh Spice\"> Posh Spice</form>";
     var answerOptions3 = "<form action=\"\"><input type=\"radio\" name=\"nba\" value=\"New York Knicks\">New York Knicks <input type=\"radio\" name=\"nba\" value=\"Portland Trailblazers\"> Portland Trailblazers <input type=\"radio\" name=\"nba\" value=\"Los Angeles Lakers\"> Los Angeles Lakers <input type=\"radio\" name=\"nba\" value=\"Chicago Bulls\"> Chicago Bulls</form>";
@@ -17,13 +39,12 @@ $(document).ready(function() {
     var answerOptions5 = "<form action=\"\"><input type=\"radio\" name=\"prince\" value=\"Dice\"> Dice <input type=\"radio\" name=\"prince\" value=\"Mirror\"> Mirror <input type=\"radio\" name=\"prince\" value=\"Fresh\"> Fresh <input type=\"radio\" name=\"prince\" value=\"Cab\"> Cab</form>";
 
 
-
-
+    // Uses the buttons on the html page to call the start and done functions
     $("#start").on("click", start);
     $("#done").on("click", done);
 
 
-    // When the Start button is clicked it calls this function
+    // When the Start button is clicked it calls this start function
     function start() {
         intervalId = setInterval(decrement, 1000);
         $("#start").hide();
@@ -31,10 +52,11 @@ $(document).ready(function() {
         showquestionsandanswers();
     }
 
-    // When the Done button is clicked it calls this function
+    // When the Done button is clicked it calls this done function
     function done() {
         letsseethereusults();
         stop();
+        totalthemup();
         $("#countDown").hide();
         $("#allDone").show();
     }
@@ -51,11 +73,12 @@ $(document).ready(function() {
         }
     }
 
-    // This funtion allows the timer to be displayed or not.
+    // This funtion passes the countdown timer to the html page
     function displaytimer() {
         $("#countDown").html("<h3>Time Remaining: " + number + " Seconds</h2>");
     }
 
+    // This function stages all the questions and answer options and passes them to the html page via div ids
     function showquestionsandanswers() {
 
         $("#question1").html("<h2>What is the first full length CGI movie?</h2>");
@@ -73,149 +96,38 @@ $(document).ready(function() {
         $("#done").show();
 
 
-
-        // Testing first question
-        $('input:radio[name=cgimovie]').click(function() {
-
-
-            if (this.value === "Toy Story") {
-                correctAnswers = 1;
-                incorrectAnswers = 0;
-                unansweredQuestions = 0;
-            }
-
-            if (this.value === "A Bugs Life" || "Monsters Inc" || "The Lion King") {
-                correctAnswers = 0;
-                incorrectAnswers = 1;
-                unansweredQuestions = 0;
-            } else {
-                correctAnswers = 0;
-                incorrectAnswers = 0;
-                unansweredQuestions = 1;
-            }
+        // Here we are looking at the input radio buttons and capturing the final choice for their respective variables
+        $('input:radio[name=cgimovie]').change(function() {
+            cgimovie = (this.value);
 
         });
 
-
-        // Testing second question
-        $('input:radio[name=spicegirls]').click(function() {
-
-
-            if (this.value === "Sporty Spice" || "Scary Spice" || "Posh Spice") {
-                correctAnswers = 1;
-                incorrectAnswers = 0;
-                unansweredQuestions = 0;
-            }
-
-            if (this.value === "Fred Spice") {
-                correctAnswers = 0;
-                incorrectAnswers = 1;
-                unansweredQuestions = 0;
-            } else {
-                correctAnswers = 0;
-                incorrectAnswers = 0;
-                unansweredQuestions = 1;
-            }
+        $('input:radio[name=spicegirls]').change(function() {
+            spicegirls = (this.value);
 
         });
 
-
-        // Testing third question
-        $('input:radio[name=nba]').click(function() {
-
-
-            if (this.value === "Chicago Bulls") {
-                correctAnswers = 1;
-                incorrectAnswers = 0;
-                unansweredQuestions = 0;
-            }
-
-            if (this.value === "New York Knicks" || "Portland Trailblazers" || "Los Angeles Lakers") {
-                correctAnswers = 0;
-                incorrectAnswers = 1;
-                unansweredQuestions = 0;
-            } else {
-                correctAnswers = 0;
-                incorrectAnswers = 0;
-                unansweredQuestions = 1;
-            }
+        $('input:radio[name=nba]').change(function() {
+            nba = (this.value);
 
         });
 
-        // Testing fourth question
-        $('input:radio[name=group]').click(function() {
-
-
-            if (this.value === "Nirvana") {
-                correctAnswers = 1;
-                incorrectAnswers = 0;
-                unansweredQuestions = 0;
-            }
-
-            if (this.value === "Backstreet Boys" || "The Offspring" || "No Doubt") {
-                correctAnswers = 0;
-                incorrectAnswers = 1;
-                unansweredQuestions = 0;
-            } else {
-                correctAnswers = 0;
-                incorrectAnswers = 0;
-                unansweredQuestions = 1;
-            }
+        $('input:radio[name=group]').change(function() {
+            group = (this.value);
 
         });
 
-        // Testing fifth question
-        $('input:radio[name=prince]').click(function() {
+        $('input:radio[name=prince]').change(function() {
+            prince = (this.value);
 
-
-            if (this.value === "Fresh") {
-                correctAnswers = 1;
-                incorrectAnswers = 0;
-                unansweredQuestions = 0;
-            }
-
-            if (this.value === "Dice" || "Mirror" || "Cab") {
-                correctAnswers = 0;
-                incorrectAnswers = 1;
-                unansweredQuestions = 0;
-            } else {
-                correctAnswers = 0;
-                incorrectAnswers = 0;
-                unansweredQuestions = 1;
-            }
-
-        });
-
-
-
-        console.log(this.value);
-        console.log(correctAnswers);
-        console.log(incorrectAnswers);
-        console.log(unansweredQuestions);
-
-
-
-        $(':radio[name=spicegirls]').change(function() {
-            console.log(this.value);
-        });
-
-        $(':radio[name=nba]').change(function() {
-            console.log(this.value);
-        });
-
-        $(':radio[name=group]').change(function() {
-            console.log(this.value);
-        });
-
-        $(':radio[name=prince]').change(function() {
-            console.log(this.value);
         });
 
 
     }
 
-
+    // When the done function runs it runs this function to hide the previous view and show the results
     function letsseethereusults() {
+
 
         $("#question1").hide();
         $("#question2").hide();
@@ -237,16 +149,80 @@ $(document).ready(function() {
         $("#incorrectanswers").show();
         $("#unansweredquestions").show();
 
-        $("#correctanswers").html("Correct Answers: " + correctAnswers);
-        $("#incorrectanswers").html("Incorrect Answers: " + incorrectAnswers);
-        $("#unansweredquestions").html("Unanswered Questions: " + unansweredQuestions);
 
     }
 
+    // This is where we calculate all the correct and incorrect and unanswered questions and add them together for the results
+    function totalthemup() {
 
+        // Calculating first question cgimovie
+        if (cgimovie == "Toy Story") {
+            correctAnswer1 = 1;
+        } else if (cgimovie == "A Bugs Life" || cgimovie == "Monsters Inc" || cgimovie == "The Lion King") {
+
+            incorrectAnswer1 = 1;
+
+        } else if (cgimovie == 0) {
+            unansweredQuestion1 = 1;
+        }
+
+
+        // Calculating second question spicegirls
+        if (spicegirls == "Fred Spice") {
+            correctAnswer2 = 1;
+        } else if (spicegirls == "Sporty Spice" || spicegirls == "Scary Spice" || spicegirls == "Posh Spice") {
+
+            incorrectAnswer2 = 1;
+
+        } else if (spicegirls == 0) {
+            unansweredQuestion2 = 1;
+        }
+
+
+        // Calculating third question nba
+        if (nba == "Chicago Bulls") {
+            correctAnswer3 = 1;
+        } else if (nba == "New York Knicks" || nba == "Portland Trailblazers" || nba == "Los Angeles Lakers") {
+
+            incorrectAnswer3 = 1;
+
+        } else if (nba == 0) {
+            unansweredQuestion3 = 1;
+        }
+
+
+        // Calculating forth question group
+        if (group == "Nervana") {
+            correctAnswer4 = 1;
+        } else if (group == "Backstreet Boys" || group == "The Offspring" || group == "No Doubt") {
+
+            incorrectAnswer4 = 1;
+
+        } else if (nba == 0) {
+            unansweredQuestion4 = 1;
+        }
+
+
+        // Calculating fifth question group
+        if (prince == "Fresh") {
+            correctAnswer5 = 1;
+        } else if (prince == "Dice" || prince == "Mirror" || prince == "Cab") {
+
+            incorrectAnswer5 = 1;
+
+        } else if (nba == 0) {
+            unansweredQuestion5 = 1;
+        }
+
+        // Totaling and constructing the verbiage that will be passed into the html div ids
+        $("#correctanswers").html("Correct Answers: " + Number(correctAnswer1 + correctAnswer2 + correctAnswer3 + correctAnswer4 + correctAnswer5));
+        $("#incorrectanswers").html("Incorrect Answers: " + Number(incorrectAnswer1 + incorrectAnswer2 + incorrectAnswer3 + incorrectAnswer4 + incorrectAnswer5));
+        $("#unansweredquestions").html("Unanswered Questions: " + Number(unansweredQuestion1 + unansweredQuestion2 + unansweredQuestion3 + unansweredQuestion4 + unansweredQuestion5));
+
+    }
+    // Clearing the clock on stop
     function stop() {
         clearInterval(intervalId);
 
     }
-
 });
